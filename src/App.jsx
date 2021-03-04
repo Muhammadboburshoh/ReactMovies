@@ -4,7 +4,7 @@ import {
   HomePages,
   MoviesPages,
   PopularPages,
-  SengleMoviePages,
+  SingleMoviePage,
   SeriesPages,
   TvShowsPages
 } from "./pages"
@@ -23,7 +23,7 @@ function App() {
       <Route exact path="/series" component={SeriesPages} />
       <Route exact path="/tvShows" component={TvShowsPages} />
       <Route exact path="/movies" component={MoviesPages} />
-      <Route exact path="/movie:/id" component={SengleMoviePages} />
+      <Route exact path="/movie/:id" component={SingleMoviePage} />
 
       </Switch>
     </>
