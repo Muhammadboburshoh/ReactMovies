@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { NavLink } from "react-router-dom"
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -7,8 +8,24 @@ import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MovieIcon from '@material-ui/icons/Movie';
+import TheatersIcon from '@material-ui/icons/Theaters';
+import HomeIcon from '@material-ui/icons/Home';
+import StarsIcon from '@material-ui/icons/Stars';
+import LiveTvIcon from '@material-ui/icons/LiveTv';
 
 const useStyles = makeStyles((theme) => ({
+
+  textDecoration: {
+    textDecoration: "none",
+    color: "#333"
+  },
+
   root: {
     flexGrow: 1,
   },
@@ -66,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
 function Appbar() {
   const classes = useStyles()
 
+  const [drawerState, setDrawerState] = useState(false)
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -75,6 +94,7 @@ function Appbar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => setDrawerState(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -96,6 +116,71 @@ function Appbar() {
           </div>
         </Toolbar>
       </AppBar>
+
+      <Drawer open={drawerState} onClose={() => setDrawerState(!drawerState)}>
+        <List>
+
+          <NavLink to="/"
+            className={classes.textDecoration}
+            onClick={() => setDrawerState(false)}
+          >
+            <ListItem button >
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </NavLink>
+
+          <NavLink to="/popular"
+            className={classes.textDecoration}
+            onClick={() => setDrawerState(false)}
+          >
+            <ListItem button >
+              <ListItemIcon>
+                <StarsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Popular" />
+            </ListItem>
+          </NavLink>
+
+          <NavLink to="/movies"
+            className={classes.textDecoration}
+            onClick={() => setDrawerState(false)}
+          >
+            <ListItem button >
+              <ListItemIcon>
+                <MovieIcon />
+              </ListItemIcon>
+              <ListItemText primary="Movies" />
+            </ListItem>
+          </NavLink>
+
+          <NavLink to="/series"
+            className={classes.textDecoration}
+            onClick={() => setDrawerState(false)}
+          >
+            <ListItem button >
+              <ListItemIcon>
+                <TheatersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Series" />
+            </ListItem>
+          </NavLink>
+
+          <NavLink to="/tvShows"
+            className={classes.textDecoration}
+            onClick={() => setDrawerState(false)}
+          >
+            <ListItem button >
+              <ListItemIcon>
+                <LiveTvIcon />
+              </ListItemIcon>
+              <ListItemText primary="TV Shows" />
+            </ListItem>
+          </NavLink>
+        </List>
+      </Drawer>
     </div>
   )
 }
