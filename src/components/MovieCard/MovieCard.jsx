@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -18,18 +19,16 @@ const useStyles = makeStyles({
   media: {
     height: 500,
   },
-  box: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-  },
   cardBottom: {
     marginTop: "auto",
     justifyContent: "space-between"
-  }
+  },
+  watchLink: {
+    textDecoration: "none",
+  },
 });
 
-function MovieCard ({title, description, id, img}) {
+function MovieCard({ title, description, id, img }) {
 
   const classes = useStyles();
 
@@ -51,11 +50,15 @@ function MovieCard ({title, description, id, img}) {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.cardBottom}>
+        <Link
+          className={classes.watchLink}
+          to={`/movie/${id}`}>
+          <Button size="small" color="primary">
+          Watch
+          </Button>
+        </Link>
         <Button size="small" color="primary">
           Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
         </Button>
       </CardActions>
     </Card>
