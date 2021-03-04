@@ -63,7 +63,7 @@ const SingleMoviePage = ({match}) => {
     .then(function () {
       // always executed
     }); 
-  }, []);
+  }, [match.params.id]);
 
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/movie/${match.params.id}/images`, {
@@ -88,7 +88,7 @@ const SingleMoviePage = ({match}) => {
     .then(function () {
       // always executed
     }); 
-  }, []);
+  }, [match.params.id]);
 
   return (
     <>
@@ -98,13 +98,14 @@ const SingleMoviePage = ({match}) => {
             <Typography
               gutterBottom
               className={classes.imgStyle}
+              variant="h3"
             >
               <img
                 className={classes.movieImg}
                 src={`https://image.tmdb.org/t/p/w500/${movieItem.data.poster_path}`}
                 alt={movieItem.data.title}
               />
-              <h1>{movieItem.data.title}</h1>
+              {movieItem.data.title}
             </Typography>
 
             {
