@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   },
   media: {
     height: 500,
+    filter: "blur(10px)"
   },
   cardBottom: {
     marginTop: "auto",
