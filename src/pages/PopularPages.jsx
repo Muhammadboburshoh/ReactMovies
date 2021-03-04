@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from "react"
+import Grid from '@material-ui/core/Grid';
+import MovieCard from "../components/MovieCard/MovieCard"
 
 function PopularPages () {
 
@@ -11,7 +13,7 @@ function PopularPages () {
 
   useEffect(() => {
 
-    axios.get('https://api.themovieb.org/3/movie/popular?page=1', {
+    axios.get('https://api.themoviedb.org/3/movie/popular?page=1', {
       params: {
         api_key: '8d08d31e1b08de961a19e2ae293de867'
       }
@@ -34,16 +36,33 @@ function PopularPages () {
 
   }, [])
 
+  console.log(movies.data);
   return (
-    <header>
+    <div>
       {
-        !movies.loading && movies.data.map((item, i) => {
-          return (
-            <h3 key={i}>{item.title}</h3>
-          )
-        })
+        !movies.loading && (
+          <Grid 
+            container
+            direction="row"
+            justify="center"
+          >
+            {
+              movies.data.map ((item, i) => (
+
+                <Grid  item xs={6} sm={3} key={i}>
+                  <MovieCard 
+                    id={item.id}
+                    description={item.overview}
+                    title={item.title}
+                    img={item.poster_path}
+                  />
+                </Grid>
+              ))
+            }
+          </Grid>
+        )
       }
-    </header>
+    </div>
   )
 }
 
